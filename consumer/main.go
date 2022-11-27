@@ -28,9 +28,9 @@ func init() {
 		panic(err.Error())
 	}
 	if kafkaConsumer == nil {
-		panic(fmt.Sprintf("consumer is nil. kafka info -> {brokers:%v, topic: %v, group: %v}", kafkaBrokers, kafkaTopic, groupId))
+		panic(fmt.Sprintf("consumer_group is nil. kafka info -> {brokers:%v, topic: %v, group: %v}", kafkaBrokers, kafkaTopic, groupId))
 	}
-	fmt.Printf("kafka init success, consumer -> %v, topic -> %v, ", kafkaConsumer, kafkaTopic)
+	fmt.Printf("kafka init success, consumer_group -> %v, topic -> %v, ", kafkaConsumer, kafkaTopic)
 }
 
 func main() {
@@ -45,11 +45,11 @@ func main() {
 			}
 		case err, ok := <-kafkaConsumer.Errors():
 			if ok {
-				fmt.Printf("consumer error: %v", err)
+				fmt.Printf("consumer_group error: %v", err)
 			}
 		case ntf, ok := <-kafkaConsumer.Notifications():
 			if ok {
-				fmt.Printf("consumer notification: %v", ntf)
+				fmt.Printf("consumer_group notification: %v", ntf)
 			}
 		}
 	}
